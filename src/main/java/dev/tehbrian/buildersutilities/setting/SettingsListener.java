@@ -26,8 +26,9 @@ import java.util.Set;
 
 public final class SettingsListener implements Listener {
 
-	private static final Set<Material> necessaryPhysicsBlockTypes = new HashSet<>();
-	private static final Set<Material> redstonePhysicsBlockTypes = new HashSet<>();
+	private static final Set<Material> NECESSARY_PHYSICS_BLOCK_TYPES = new HashSet<>();
+	private static final Set<Material> REDSTONE_PHYSICS_BLOCK_TYPES = new HashSet<>();
+
 	private final ConfigConfig configConfig;
 	private final Logger logger;
 
@@ -41,77 +42,77 @@ public final class SettingsListener implements Listener {
 	}
 
 	public boolean isBlockTypeNecessaryPhysics(final Material material) {
-		if (necessaryPhysicsBlockTypes.isEmpty()) {
-			necessaryPhysicsBlockTypes.add(Material.CHEST);
-			necessaryPhysicsBlockTypes.add(Material.TRAPPED_CHEST);
-			necessaryPhysicsBlockTypes.add(Material.ENDER_CHEST);
-			necessaryPhysicsBlockTypes.addAll(Tag.COPPER_CHESTS.getValues());
-			necessaryPhysicsBlockTypes.addAll(Tag.STAIRS.getValues());
-			necessaryPhysicsBlockTypes.addAll(Tag.FENCES.getValues());
-			necessaryPhysicsBlockTypes.addAll(Tag.FENCE_GATES.getValues());
-			necessaryPhysicsBlockTypes.add(Material.GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.BLACK_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.BLUE_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.BROWN_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.CYAN_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.GRAY_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.GREEN_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.LIME_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.MAGENTA_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.ORANGE_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.PINK_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.PURPLE_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.RED_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.WHITE_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.add(Material.YELLOW_STAINED_GLASS_PANE);
-			necessaryPhysicsBlockTypes.addAll(Tag.WALLS.getValues());
-			necessaryPhysicsBlockTypes.addAll(Tag.BARS.getValues());
-			necessaryPhysicsBlockTypes.addAll(Tag.DOORS.getValues());
+		if (NECESSARY_PHYSICS_BLOCK_TYPES.isEmpty()) {
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.CHEST);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.TRAPPED_CHEST);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.ENDER_CHEST);
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.COPPER_CHESTS.getValues());
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.STAIRS.getValues());
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.FENCES.getValues());
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.FENCE_GATES.getValues());
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.BLACK_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.BLUE_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.BROWN_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.CYAN_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.GRAY_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.GREEN_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.LIME_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.MAGENTA_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.ORANGE_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.PINK_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.PURPLE_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.RED_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.WHITE_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.add(Material.YELLOW_STAINED_GLASS_PANE);
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.WALLS.getValues());
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.BARS.getValues());
+			NECESSARY_PHYSICS_BLOCK_TYPES.addAll(Tag.DOORS.getValues());
 		}
 
-		return necessaryPhysicsBlockTypes.contains(material);
+		return NECESSARY_PHYSICS_BLOCK_TYPES.contains(material);
 	}
 
 	public boolean isBlockTypeRedstonePhysics(final Material material) {
-		if (redstonePhysicsBlockTypes.isEmpty()) {
-			redstonePhysicsBlockTypes.addAll(Tag.REDSTONE_ORES.getValues());
-			redstonePhysicsBlockTypes.add(Material.REDSTONE_BLOCK);
-			redstonePhysicsBlockTypes.add(Material.REDSTONE_WIRE);
-			redstonePhysicsBlockTypes.add(Material.REDSTONE_LAMP);
-			redstonePhysicsBlockTypes.add(Material.REDSTONE_TORCH);
-			redstonePhysicsBlockTypes.add(Material.REDSTONE_WALL_TORCH);
-			redstonePhysicsBlockTypes.add(Material.DAYLIGHT_DETECTOR);
-			redstonePhysicsBlockTypes.add(Material.REPEATER);
-			redstonePhysicsBlockTypes.add(Material.COMPARATOR);
-			redstonePhysicsBlockTypes.addAll(Tag.DOORS.getValues());
-			redstonePhysicsBlockTypes.add(Material.TARGET);
-			redstonePhysicsBlockTypes.add(Material.STRUCTURE_BLOCK);
-			redstonePhysicsBlockTypes.add(Material.JUKEBOX);
-			redstonePhysicsBlockTypes.add(Material.CRAFTER);
-			redstonePhysicsBlockTypes.add(Material.POWERED_RAIL);
-			redstonePhysicsBlockTypes.add(Material.DETECTOR_RAIL);
-			redstonePhysicsBlockTypes.add(Material.ACTIVATOR_RAIL);
-			redstonePhysicsBlockTypes.add(Material.HOPPER);
-			redstonePhysicsBlockTypes.add(Material.NOTE_BLOCK);
-			redstonePhysicsBlockTypes.add(Material.LEVER);
-			redstonePhysicsBlockTypes.addAll(Tag.BUTTONS.getValues());
-			redstonePhysicsBlockTypes.add(Material.COMMAND_BLOCK);
-			redstonePhysicsBlockTypes.add(Material.CHAIN_COMMAND_BLOCK);
-			redstonePhysicsBlockTypes.add(Material.REPEATING_COMMAND_BLOCK);
-			redstonePhysicsBlockTypes.add(Material.TRIPWIRE);
-			redstonePhysicsBlockTypes.add(Material.TRIPWIRE_HOOK);
-			redstonePhysicsBlockTypes.addAll(Tag.PRESSURE_PLATES.getValues());
-			redstonePhysicsBlockTypes.add(Material.STRING);
-			redstonePhysicsBlockTypes.add(Material.PISTON);
-			redstonePhysicsBlockTypes.add(Material.STICKY_PISTON);
-			redstonePhysicsBlockTypes.add(Material.MOVING_PISTON);
-			redstonePhysicsBlockTypes.add(Material.PISTON_HEAD);
-			redstonePhysicsBlockTypes.add(Material.OBSERVER);
+		if (REDSTONE_PHYSICS_BLOCK_TYPES.isEmpty()) {
+			REDSTONE_PHYSICS_BLOCK_TYPES.addAll(Tag.REDSTONE_ORES.getValues());
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REDSTONE_BLOCK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REDSTONE_WIRE);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REDSTONE_LAMP);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REDSTONE_TORCH);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REDSTONE_WALL_TORCH);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.DAYLIGHT_DETECTOR);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REPEATER);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.COMPARATOR);
+			REDSTONE_PHYSICS_BLOCK_TYPES.addAll(Tag.DOORS.getValues());
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.TARGET);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.STRUCTURE_BLOCK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.JUKEBOX);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.CRAFTER);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.POWERED_RAIL);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.DETECTOR_RAIL);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.ACTIVATOR_RAIL);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.HOPPER);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.NOTE_BLOCK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.LEVER);
+			REDSTONE_PHYSICS_BLOCK_TYPES.addAll(Tag.BUTTONS.getValues());
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.COMMAND_BLOCK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.CHAIN_COMMAND_BLOCK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.REPEATING_COMMAND_BLOCK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.TRIPWIRE);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.TRIPWIRE_HOOK);
+			REDSTONE_PHYSICS_BLOCK_TYPES.addAll(Tag.PRESSURE_PLATES.getValues());
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.STRING);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.PISTON);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.STICKY_PISTON);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.MOVING_PISTON);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.PISTON_HEAD);
+			REDSTONE_PHYSICS_BLOCK_TYPES.add(Material.OBSERVER);
 		}
 
-		return redstonePhysicsBlockTypes.contains(material);
+		return REDSTONE_PHYSICS_BLOCK_TYPES.contains(material);
 	}
 
 	@EventHandler
@@ -157,11 +158,11 @@ public final class SettingsListener implements Listener {
 			return;
 		}
 
-		if (isBlockTypeNecessaryPhysics(blockType)) {
+		if (this.isBlockTypeNecessaryPhysics(blockType)) {
 			return;
 		}
 
-		if (isBlockTypeRedstonePhysics(blockType)) {
+		if (this.isBlockTypeRedstonePhysics(blockType)) {
 			if (this.configConfig.data().settings().disableRedstone()) {
 				event.setCancelled(true);
 				this.logger.debug("Physics were cancelled because disable-redstone: true");
