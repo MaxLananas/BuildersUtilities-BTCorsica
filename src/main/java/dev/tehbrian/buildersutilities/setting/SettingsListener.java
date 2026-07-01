@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import dev.tehbrian.buildersutilities.config.ConfigConfig;
 import dev.tehbrian.buildersutilities.util.Permissions;
 import org.bukkit.Material;
+import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -20,10 +21,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.slf4j.Logger;
 
-import java.util.Locale;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class SettingsListener implements Listener {
 
+	private static final Set<Material> necessaryPhysicsBlockTypes = new HashSet<>();
+	private static final Set<Material> redstonePhysicsBlockTypes = new HashSet<>();
 	private final ConfigConfig configConfig;
 	private final Logger logger;
 
@@ -34,6 +38,80 @@ public final class SettingsListener implements Listener {
 	) {
 		this.configConfig = configConfig;
 		this.logger = logger;
+	}
+
+	public boolean isBlockTypeNecessaryPhysics(final Material material) {
+		if (necessaryPhysicsBlockTypes.isEmpty()) {
+			necessaryPhysicsBlockTypes.add(Material.CHEST);
+			necessaryPhysicsBlockTypes.add(Material.TRAPPED_CHEST);
+			necessaryPhysicsBlockTypes.add(Material.ENDER_CHEST);
+			necessaryPhysicsBlockTypes.addAll(Tag.COPPER_CHESTS.getValues());
+			necessaryPhysicsBlockTypes.addAll(Tag.STAIRS.getValues());
+			necessaryPhysicsBlockTypes.addAll(Tag.FENCES.getValues());
+			necessaryPhysicsBlockTypes.addAll(Tag.FENCE_GATES.getValues());
+			necessaryPhysicsBlockTypes.add(Material.GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.BLACK_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.BLUE_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.BROWN_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.CYAN_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.GRAY_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.GREEN_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.LIGHT_GRAY_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.LIME_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.MAGENTA_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.ORANGE_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.PINK_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.PURPLE_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.RED_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.WHITE_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.add(Material.YELLOW_STAINED_GLASS_PANE);
+			necessaryPhysicsBlockTypes.addAll(Tag.WALLS.getValues());
+			necessaryPhysicsBlockTypes.addAll(Tag.BARS.getValues());
+			necessaryPhysicsBlockTypes.addAll(Tag.DOORS.getValues());
+		}
+
+		return necessaryPhysicsBlockTypes.contains(material);
+	}
+
+	public boolean isBlockTypeRedstonePhysics(final Material material) {
+		if (redstonePhysicsBlockTypes.isEmpty()) {
+			redstonePhysicsBlockTypes.addAll(Tag.REDSTONE_ORES.getValues());
+			redstonePhysicsBlockTypes.add(Material.REDSTONE_BLOCK);
+			redstonePhysicsBlockTypes.add(Material.REDSTONE_WIRE);
+			redstonePhysicsBlockTypes.add(Material.REDSTONE_LAMP);
+			redstonePhysicsBlockTypes.add(Material.REDSTONE_TORCH);
+			redstonePhysicsBlockTypes.add(Material.REDSTONE_WALL_TORCH);
+			redstonePhysicsBlockTypes.add(Material.DAYLIGHT_DETECTOR);
+			redstonePhysicsBlockTypes.add(Material.REPEATER);
+			redstonePhysicsBlockTypes.add(Material.COMPARATOR);
+			redstonePhysicsBlockTypes.addAll(Tag.DOORS.getValues());
+			redstonePhysicsBlockTypes.add(Material.TARGET);
+			redstonePhysicsBlockTypes.add(Material.STRUCTURE_BLOCK);
+			redstonePhysicsBlockTypes.add(Material.JUKEBOX);
+			redstonePhysicsBlockTypes.add(Material.CRAFTER);
+			redstonePhysicsBlockTypes.add(Material.POWERED_RAIL);
+			redstonePhysicsBlockTypes.add(Material.DETECTOR_RAIL);
+			redstonePhysicsBlockTypes.add(Material.ACTIVATOR_RAIL);
+			redstonePhysicsBlockTypes.add(Material.HOPPER);
+			redstonePhysicsBlockTypes.add(Material.NOTE_BLOCK);
+			redstonePhysicsBlockTypes.add(Material.LEVER);
+			redstonePhysicsBlockTypes.addAll(Tag.BUTTONS.getValues());
+			redstonePhysicsBlockTypes.add(Material.COMMAND_BLOCK);
+			redstonePhysicsBlockTypes.add(Material.CHAIN_COMMAND_BLOCK);
+			redstonePhysicsBlockTypes.add(Material.REPEATING_COMMAND_BLOCK);
+			redstonePhysicsBlockTypes.add(Material.TRIPWIRE);
+			redstonePhysicsBlockTypes.add(Material.TRIPWIRE_HOOK);
+			redstonePhysicsBlockTypes.addAll(Tag.PRESSURE_PLATES.getValues());
+			redstonePhysicsBlockTypes.add(Material.STRING);
+			redstonePhysicsBlockTypes.add(Material.PISTON);
+			redstonePhysicsBlockTypes.add(Material.STICKY_PISTON);
+			redstonePhysicsBlockTypes.add(Material.MOVING_PISTON);
+			redstonePhysicsBlockTypes.add(Material.PISTON_HEAD);
+			redstonePhysicsBlockTypes.add(Material.OBSERVER);
+		}
+
+		return redstonePhysicsBlockTypes.contains(material);
 	}
 
 	@EventHandler
@@ -70,61 +148,29 @@ public final class SettingsListener implements Listener {
 			return;
 		}
 
-		final Block sourceBlock = event.getSourceBlock();
 		final Block block = event.getBlock();
+		final Material blockType = block.getType();
 
-		if (sourceBlock.getType().isAir() || block.getType().isAir()) {
+		if (event.getSourceBlock().getType().isAir() || blockType.isAir()) {
 			return;
 		}
 
-		// allow grass blocks to convert to snowy.
-		if (sourceBlock.getType().name().toLowerCase(Locale.ROOT).contains("snow")
+		// allow grass blocks to turn snowy.
+		if (Tag.SNOW.isTagged(blockType)
 				&& block.getLocation().add(0, -1, 0).getBlock().getType().equals(Material.GRASS_BLOCK)) {
 			return;
 		}
 
-		final String blockType = block.getType().name().toLowerCase();
-		if (blockType.contains("chest")
-				|| blockType.contains("stair")
-				|| blockType.contains("fence")
-				|| blockType.contains("pane")
-				|| blockType.contains("wall")
-				|| blockType.contains("bar")
-				|| blockType.contains("door")) {
+		if (isBlockTypeNecessaryPhysics(blockType)) {
 			return;
 		}
 
-		if (this.configConfig.data().settings().disableRedstone()) {
-			if (blockType.contains("redstone")
-					|| blockType.contains("daylight")
-					|| blockType.contains("diode")
-					|| blockType.contains("repeater")
-					|| blockType.contains("comparator")
-					|| blockType.contains("door")
-					|| blockType.contains("target")
-					|| blockType.contains("structure")
-					|| blockType.contains("jukebox")
-					|| blockType.contains("crafter")
-					|| blockType.contains("powered_rail")
-					|| blockType.contains("detector_rail")
-					|| blockType.contains("activator_rail")
-					|| blockType.contains("hopper")
-					|| blockType.contains("note")
-					|| blockType.contains("lever")
-					|| blockType.contains("button")
-					|| blockType.contains("command")
-					|| blockType.contains("tripwire")
-					|| blockType.contains("plate")
-					|| blockType.contains("string")
-					|| blockType.contains("piston")
-					|| blockType.contains("observer")) {
+		if (isBlockTypeRedstonePhysics(blockType)) {
+			if (this.configConfig.data().settings().disableRedstone()) {
 				event.setCancelled(true);
 				this.logger.debug("Physics were cancelled because disable-redstone: true");
-				return;
 			}
-		}
-
-		if (event.getChangedType().hasGravity()) {
+		} else if (event.getChangedType().hasGravity()) {
 			if (this.configConfig.data().settings().disableGravityPhysics()) {
 				event.setCancelled(true);
 				this.logger.debug("Gravity physics were cancelled because disable-gravity-physics: true");
