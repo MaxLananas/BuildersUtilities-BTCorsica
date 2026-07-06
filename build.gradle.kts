@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-	paperweight.paperDevBundle("26.1.2.build.+")
+	paperweight.paperDevBundle("26.2.build.+")
 	compileOnly("org.jspecify:jspecify:1.0.0")
 	implementation("love.broccolai.corn:corn-minecraft:4.1.0-SNAPSHOT")
 	implementation("org.bstats:bstats-bukkit:3.2.1")
@@ -87,6 +87,6 @@ tasks {
 	}
 
 	runServer {
-		minecraftVersion("26.1.2")
+		minecraftVersion("26.2")
 	}
 }
