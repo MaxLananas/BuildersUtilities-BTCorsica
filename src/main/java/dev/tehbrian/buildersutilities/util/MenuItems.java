@@ -9,7 +9,7 @@ import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
 public final class MenuItems {
 
 	public static final ItemStack BACKGROUND = edit(ItemType.LIGHT_GRAY_STAINED_GLASS_PANE)
-			.unset(ITEM_NAME)
+			.hideTooltip(true)
 			.item();
 
 	private MenuItems() {

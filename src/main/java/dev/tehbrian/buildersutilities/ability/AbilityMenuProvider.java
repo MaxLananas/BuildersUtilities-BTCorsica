@@ -6,6 +6,8 @@ import dev.tehbrian.buildersutilities.user.User;
 import dev.tehbrian.buildersutilities.util.ChestSize;
 import dev.tehbrian.buildersutilities.util.MenuItems;
 import dev.tehbrian.buildersutilities.util.Permissions;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.TooltipDisplay;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -25,13 +27,13 @@ import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
 public final class AbilityMenuProvider {
 
 	private static final ItemStack GREEN = edit(ItemType.LIME_STAINED_GLASS_PANE)
-			.unset(ITEM_NAME)
+			.hideTooltip(true)
 			.item();
 	private static final ItemStack ORANGE = edit(ItemType.ORANGE_STAINED_GLASS_PANE)
-			.unset(ITEM_NAME)
+			.hideTooltip(true)
 			.item();
 	private static final ItemStack RED = edit(ItemType.RED_STAINED_GLASS_PANE)
-			.unset(ITEM_NAME)
+			.hideTooltip(true)
 			.item();
 
 	private final LangConfig langConfig;
