@@ -39,27 +39,13 @@ public final class NoclipManager {
 				continue;
 			}
 
-			final boolean noclip;
 			if (p.getGameMode() == GameMode.CREATIVE) {
-				if (p.isOnGround() && p.isSneaking()) {
-					noclip = true;
-				} else {
-					noclip = this.shouldNoclip(p);
-				}
-
-				if (noclip) {
+				if ((p.isOnGround() && p.isSneaking()) || this.shouldNoclip(p)) {
 					p.setGameMode(GameMode.SPECTATOR);
 				}
 			} else if (p.getGameMode() == GameMode.SPECTATOR) {
-				if (p.isOnGround()) {
-					noclip = true;
-				} else {
-					noclip = this.shouldNoclip(p);
-				}
-
-				if (!noclip) {
+				if (!p.isOnGround() && !this.shouldNoclip(p)) {
 					p.setGameMode(GameMode.CREATIVE);
-//					p.setFlying(true);
 				}
 			}
 		}
