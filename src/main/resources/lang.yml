@@ -75,38 +75,41 @@ menus:
     iron-door-toggle:
       name: "<#99FFFF><bold>Iron Door Toggle"
       description: |-
-        <#6699FF> Allows you to toggle iron doors
-        <#6699FF>and iron trapdoors open and closed.
-        <gray> To use, right click on an iron
-        <gray>door while not holding anything.
+        <#6699FF> Allows you to toggle
+        <#6699FF>iron doors/trapdoors.
     double-slab-break:
       name: "<#99FFFF><bold>Double Slab Break"
       description: |-
         <#6699FF> Allows you to break
         <#6699FF>double slabs in half.
-        <gray> To use, break a double slab
-        <gray>while holding any slab.
+        <gray> To use, break a
+        <gray>double slab while
+        <gray>holding any slab.
     glazed-terracotta-rotate:
       name: "<#99FFFF><bold>Glazed Terracotta Rotate"
       description: |-
         <#6699FF> Allows you to rotate
         <#6699FF>glazed terracotta.
-        <gray> To use, right click on a glazed
-        <gray>terracotta while shifting.
+        <gray> To use, right click on
+        <gray>a glazed terracotta
+        <gray>while sneaking.
     night-vision:
       name: "<#99FFFF><bold>Night Vision"
       description: |-
-        <#6699FF> Grants you infinite night vision.
+        <#6699FF> Grants you infinite
+        <#6699FF>night vision.
     noclip:
       name: "<#99FFFF><bold>Noclip"
       description: |-
-        <#6699FF> Intelligently toggles you between
-        <#6699FF>creative and spectator mode.
+        <#6699FF> Intelligently toggles
+        <#6699FF>you between creative
+        <#6699FF>and spectator mode.
     advanced-fly:
       name: "<#99FFFF><bold>Advanced Fly"
       description: |-
-        <#6699FF> Prevents you from drifting in
-        <#6699FF>creative mode flight.
+        <#6699FF> Prevents you from
+        <#6699FF>drifting in creative
+        <#6699FF>mode flight.
 
 # No touch!
 version: 2
