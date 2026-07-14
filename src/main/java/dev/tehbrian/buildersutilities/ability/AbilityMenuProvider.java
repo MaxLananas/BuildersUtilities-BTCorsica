@@ -19,22 +19,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static dev.tehbrian.buildersutilities.util.ItemModifier.itemModifier;
+import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
 import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
-import static io.papermc.paper.datacomponent.DataComponentTypes.LORE;
-import static io.papermc.paper.datacomponent.item.ItemLore.lore;
 
 public final class AbilityMenuProvider {
 
-	private static final ItemStack GREEN = itemModifier(ItemType.LIME_STAINED_GLASS_PANE)
+	private static final ItemStack GREEN = edit(ItemType.LIME_STAINED_GLASS_PANE)
 			.unset(ITEM_NAME)
-			.yank();
-	private static final ItemStack ORANGE = itemModifier(ItemType.ORANGE_STAINED_GLASS_PANE)
+			.item();
+	private static final ItemStack ORANGE = edit(ItemType.ORANGE_STAINED_GLASS_PANE)
 			.unset(ITEM_NAME)
-			.yank();
-	private static final ItemStack RED = itemModifier(ItemType.RED_STAINED_GLASS_PANE)
+			.item();
+	private static final ItemStack RED = edit(ItemType.RED_STAINED_GLASS_PANE)
 			.unset(ITEM_NAME)
-			.yank();
+			.item();
 
 	private final LangConfig langConfig;
 
@@ -125,10 +123,10 @@ public final class AbilityMenuProvider {
 		lore.addAll(this.langConfig.cl(NodePath.path("menus", "ability", abilityKey, "description")));
 		lore.addAll(this.langConfig.cl(NodePath.path("menus", "ability", "status", statusKey)));
 
-		return itemModifier(itemType)
-				.set(ITEM_NAME, this.langConfig.c(NodePath.path("menus", "ability", abilityKey, "name")))
-				.set(LORE, lore(lore))
-				.yank();
+		return edit(itemType)
+				.itemName(this.langConfig.c(NodePath.path("menus", "ability", abilityKey, "name")))
+				.lore(lore)
+				.item();
 	}
 
 	private void drawAbility(

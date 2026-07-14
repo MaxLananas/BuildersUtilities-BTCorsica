@@ -16,11 +16,7 @@ import org.spongepowered.configurate.NodePath;
 import java.util.List;
 
 import static dev.tehbrian.buildersutilities.banner.Sayge.patternTypes;
-import static dev.tehbrian.buildersutilities.util.ItemModifier.itemModifier;
-import static io.papermc.paper.datacomponent.DataComponentTypes.BANNER_PATTERNS;
-import static io.papermc.paper.datacomponent.DataComponentTypes.LORE;
-import static io.papermc.paper.datacomponent.item.BannerPatternLayers.bannerPatternLayers;
-import static io.papermc.paper.datacomponent.item.ItemLore.lore;
+import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
 import static java.util.Objects.requireNonNull;
 
 public final class PatternMenuProvider {
@@ -58,10 +54,10 @@ public final class PatternMenuProvider {
 
 		for (int i = 0; i < patternTypes().size(); i++) {
 			inv.setItem(
-					i + 9, itemModifier(displayBase)
-							.set(LORE, lore(this.langConfig.cl(NodePath.path("menus", "banner", "select"))))
-							.set(BANNER_PATTERNS, bannerPatternLayers(List.of(new Pattern(session.nextPatternColor(), patternTypes().get(i)))))
-							.yank()
+					i + 9, edit(displayBase)
+							.lore(this.langConfig.cl(NodePath.path("menus", "banner", "select")))
+							.bannerPatterns(List.of(new Pattern(session.nextPatternColor(), patternTypes().get(i))))
+							.item()
 			);
 		}
 

@@ -13,9 +13,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.spongepowered.configurate.NodePath;
 
-import static dev.tehbrian.buildersutilities.util.ItemModifier.itemModifier;
-import static io.papermc.paper.datacomponent.DataComponentTypes.LORE;
-import static io.papermc.paper.datacomponent.item.ItemLore.lore;
+import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
 
 public final class BaseMenuProvider {
 
@@ -67,9 +65,9 @@ public final class BaseMenuProvider {
 	}
 
 	private ItemStack createSelectBanner(final ItemType itemType) {
-		return itemModifier(itemType)
-				.set(LORE, lore(this.langConfig.cl(NodePath.path("menus", "banner", "select"))))
-				.yank();
+		return edit(itemType)
+				.lore(this.langConfig.cl(NodePath.path("menus", "banner", "select")))
+				.item();
 	}
 
 }

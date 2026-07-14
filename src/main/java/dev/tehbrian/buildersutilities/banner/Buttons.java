@@ -7,10 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.spongepowered.configurate.NodePath;
 
-import static dev.tehbrian.buildersutilities.util.ItemModifier.itemModifier;
-import static dev.tehbrian.buildersutilities.util.ItemUtil.texturedProfile;
-import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
-import static io.papermc.paper.datacomponent.DataComponentTypes.PROFILE;
+import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
 
 public final class Buttons {
 
@@ -23,23 +20,23 @@ public final class Buttons {
 	}
 
 	public static ItemStack randomize(final LangConfig langConfig, final ConfigConfig configConfig) {
-		return itemModifier(ItemType.PLAYER_HEAD)
-				.set(ITEM_NAME, langConfig.c(NodePath.path("menus", "banner", "randomize")))
-				.set(PROFILE, texturedProfile(configConfig.data().heads().banner().randomize()))
-				.yank();
+		return edit(ItemType.PLAYER_HEAD)
+				.itemName(langConfig.c(NodePath.path("menus", "banner", "randomize")))
+				.textures(configConfig.data().heads().banner().randomize())
+				.item();
 	}
 
 	public static ItemStack reset(final LangConfig langConfig) {
-		return itemModifier(ItemType.BARRIER)
-				.set(ITEM_NAME, langConfig.c(NodePath.path("menus", "banner", "reset")))
-				.yank();
+		return edit(ItemType.BARRIER)
+				.itemName(langConfig.c(NodePath.path("menus", "banner", "reset")))
+				.item();
 	}
 
 	public static ItemStack undo(final LangConfig langConfig, final ConfigConfig configConfig) {
-		return itemModifier(ItemType.PLAYER_HEAD)
-				.set(ITEM_NAME, langConfig.c(NodePath.path("menus", "banner", "undo")))
-				.set(PROFILE, texturedProfile(configConfig.data().heads().banner().undo()))
-				.yank();
+		return edit(ItemType.PLAYER_HEAD)
+				.itemName(langConfig.c(NodePath.path("menus", "banner", "undo")))
+				.textures(configConfig.data().heads().banner().undo())
+				.item();
 	}
 
 	public static void addToolbar(

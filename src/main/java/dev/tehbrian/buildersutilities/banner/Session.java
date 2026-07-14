@@ -5,6 +5,7 @@ import dev.tehbrian.buildersutilities.banner.menu.ColorMenuProvider;
 import dev.tehbrian.buildersutilities.banner.menu.DoneMenuProvider;
 import dev.tehbrian.buildersutilities.banner.menu.PatternMenuProvider;
 import dev.tehbrian.buildersutilities.config.LangConfig;
+import dev.tehbrian.buildersutilities.util.ItemEditor;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.block.banner.Pattern;
@@ -18,10 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static dev.tehbrian.buildersutilities.banner.Sayge.bannerItemType;
-import static dev.tehbrian.buildersutilities.util.ItemModifier.itemModifier;
-import static io.papermc.paper.datacomponent.DataComponentTypes.BANNER_PATTERNS;
-import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
-import static io.papermc.paper.datacomponent.item.BannerPatternLayers.bannerPatternLayers;
+import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
 
 /**
  * Holds the state of a player's banner creation session.
@@ -122,18 +120,18 @@ public final class Session {
 	}
 
 	public ItemStack generateInterfaceBanner() {
-		return itemModifier(this.generateBanner())
-				.set(ITEM_NAME, this.langConfig.c(NodePath.path("menus", "banner", "get-banner")))
-				.yank();
+		return ItemEditor.edit(this.generateBanner())
+				.itemName(this.langConfig.c(NodePath.path("menus", "banner", "get-banner")))
+				.item();
 	}
 
 	public ItemStack generateBanner() {
 		if (this.baseColor == null) {
 			return DEFAULT_BANNER;
 		} else {
-			return itemModifier(bannerItemType(this.baseColor))
-					.set(BANNER_PATTERNS, bannerPatternLayers(this.patterns))
-					.yank();
+			return edit(bannerItemType(this.baseColor))
+					.bannerPatterns(this.patterns)
+					.item();
 		}
 	}
 
