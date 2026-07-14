@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 import org.spongepowered.configurate.NodePath;
 
-import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
+import static dev.tehbrian.agna.paper.ItemEditor.edit;
 
 public final class Buttons {
 

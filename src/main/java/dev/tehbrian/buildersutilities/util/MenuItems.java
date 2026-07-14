@@ -3,7 +3,7 @@ package dev.tehbrian.buildersutilities.util;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ItemType;
 
-import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
+import static dev.tehbrian.agna.paper.ItemEditor.edit;
 import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
 
 public final class MenuItems {

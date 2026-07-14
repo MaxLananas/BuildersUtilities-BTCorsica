@@ -2,7 +2,7 @@ package dev.tehbrian.buildersutilities.armorcolor;
 
 import com.google.inject.Inject;
 import dev.tehbrian.buildersutilities.config.LangConfig;
-import dev.tehbrian.buildersutilities.util.ItemEditor;
+import dev.tehbrian.agna.paper.ItemEditor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

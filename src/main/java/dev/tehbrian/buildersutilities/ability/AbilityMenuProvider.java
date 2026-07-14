@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
+import static dev.tehbrian.agna.paper.ItemEditor.edit;
 import static io.papermc.paper.datacomponent.DataComponentTypes.ITEM_NAME;
 
 public final class AbilityMenuProvider {

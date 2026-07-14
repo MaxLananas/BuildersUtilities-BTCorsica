@@ -5,7 +5,7 @@ import dev.tehbrian.buildersutilities.banner.Buttons;
 import dev.tehbrian.buildersutilities.banner.PlayerSessions;
 import dev.tehbrian.buildersutilities.banner.Session;
 import dev.tehbrian.buildersutilities.config.LangConfig;
-import dev.tehbrian.buildersutilities.util.ItemEditor;
+import dev.tehbrian.agna.paper.ItemEditor;
 import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.entity.Player;

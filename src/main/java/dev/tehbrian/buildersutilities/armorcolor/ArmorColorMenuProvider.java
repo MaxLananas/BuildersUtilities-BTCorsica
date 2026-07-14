@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import dev.tehbrian.buildersutilities.config.ConfigConfig;
 import dev.tehbrian.buildersutilities.config.LangConfig;
 import dev.tehbrian.buildersutilities.util.ChestSize;
-import dev.tehbrian.buildersutilities.util.ItemEditor;
+import dev.tehbrian.agna.paper.ItemEditor;
 import dev.tehbrian.buildersutilities.util.MenuItems;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -15,7 +15,7 @@ import org.spongepowered.configurate.NodePath;
 
 import java.util.List;
 
-import static dev.tehbrian.buildersutilities.util.ItemEditor.edit;
+import static dev.tehbrian.agna.paper.ItemEditor.edit;
 import static java.util.Objects.requireNonNull;
 
 public final class ArmorColorMenuProvider {
