@@ -6,7 +6,6 @@ import dev.tehbrian.buildersutilities.banner.Buttons;
 import dev.tehbrian.buildersutilities.banner.PlayerSessions;
 import dev.tehbrian.buildersutilities.banner.Session;
 import dev.tehbrian.buildersutilities.config.LangConfig;
-import io.papermc.paper.datacomponent.DataComponentTypes;
 import org.bukkit.block.banner.Pattern;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -73,9 +72,9 @@ public final class PatternMenuListener implements Listener {
 		}
 
 		if (slot >= 9 && slot <= (8 + patternTypes().size())) {
-			// get the pattern from the clicked banner that PatternMenuProvider has already assigned the next pattern color to.
-			final Pattern clickedPattern = ItemEditor.edit(requireNonNull(event.getCurrentItem()))
-					.get(DataComponentTypes.BANNER_PATTERNS).patterns().get(0);
+			final Pattern clickedPattern = ItemEditor.edit(
+					requireNonNull(event.getCurrentItem())
+			).getBannerPatterns().get(0);
 			session.patterns().add(clickedPattern);
 			session.nextPatternColor(null);
 			session.showInterface(player);
