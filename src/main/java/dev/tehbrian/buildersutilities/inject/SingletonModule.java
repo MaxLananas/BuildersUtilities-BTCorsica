@@ -13,6 +13,7 @@ import dev.tehbrian.buildersutilities.config.LangConfig;
 import dev.tehbrian.buildersutilities.config.SpecialConfig;
 import dev.tehbrian.buildersutilities.special.SpecialMenuProvider;
 import dev.tehbrian.buildersutilities.user.UserService;
+import dev.tehbrian.buildersutilities.waypoint.WaypointService;
 import dev.tehbrian.mayi.paper.PaperMayi;
 
 public final class SingletonModule extends AbstractModule {
@@ -20,6 +21,7 @@ public final class SingletonModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		this.bind(UserService.class).asEagerSingleton();
+		this.bind(WaypointService.class).asEagerSingleton();
 		this.bind(PaperMayi.class).asEagerSingleton();
 
 		this.bind(ConfigConfig.class).asEagerSingleton();
@@ -36,5 +38,4 @@ public final class SingletonModule extends AbstractModule {
 		this.bind(DoneMenuProvider.class).asEagerSingleton();
 		this.bind(PlayerSessions.class).asEagerSingleton();
 	}
-
 }
