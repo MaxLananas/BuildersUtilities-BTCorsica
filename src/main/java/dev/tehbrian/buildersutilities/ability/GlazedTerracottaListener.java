@@ -9,7 +9,6 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
-import org.bukkit.Tag;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
@@ -36,6 +35,10 @@ public final class GlazedTerracottaListener implements Listener {
 		this.restrictionHelper = restrictionHelper;
 	}
 
+	private static boolean isGlazedTerracotta(final Material material) {
+		return material.name().endsWith("GLAZED_TERRACOTTA");
+	}
+
 	@EventHandler(ignoreCancelled = true)
 	public void onGlazedTerracottaInteract(final PlayerInteractEvent event) {
 		final Player player = event.getPlayer();
@@ -47,7 +50,7 @@ public final class GlazedTerracottaListener implements Listener {
 
 		final Block block = Objects.requireNonNull(event.getClickedBlock());
 
-		if (!Tag.GLAZED_TERRACOTTA.isTagged(block.getType())
+		if (!isGlazedTerracotta(block.getType())
 				|| player.getInventory().getItemInMainHand().getType() != Material.AIR
 				|| event.getAction() != Action.RIGHT_CLICK_BLOCK
 				|| event.getHand() != EquipmentSlot.HAND
@@ -64,7 +67,7 @@ public final class GlazedTerracottaListener implements Listener {
 			case EAST -> BlockFace.SOUTH;
 			case SOUTH -> BlockFace.WEST;
 			case WEST -> BlockFace.NORTH;
-			default -> directional.getFacing(); // do nothing.
+			default -> directional.getFacing();
 		});
 		block.setBlockData(directional);
 
