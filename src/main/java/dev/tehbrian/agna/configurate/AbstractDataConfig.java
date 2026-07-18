@@ -15,12 +15,12 @@ public abstract class AbstractDataConfig<W extends ConfigurateWrapper<?>, D>
 	protected abstract Class<D> dataClass();
 
 	@Override
-	public void load() throws ConfigurateException {
+	public final void load() throws ConfigurateException {
 		this.wrapper().load();
 		this.data = this.wrapper().rootNode().get(this.dataClass());
 	}
 
-	public D data() {
+	public final D data() {
 		if (this.data == null) {
 			throw new IllegalStateException("Config has not been loaded yet");
 		}
