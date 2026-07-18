@@ -27,7 +27,9 @@ public final class BuildCommand {
 			final PaperCommandManager<Source> commandManager
 	) {
 		final var root = commandManager.commandBuilder("build")
-				.commandDescription(description("Build helper commands."))
+				.commandDescription(description(
+						"Build helper commands."
+				))
 				.permission(Permissions.BUILD_CMD)
 				.senderType(PlayerSource.class);
 
@@ -39,12 +41,12 @@ public final class BuildCommand {
 					final var sender = c.sender().source();
 					final World world = sender.getWorld();
 					final TimeValue val = c.get("value");
-					world.setTime(val.ticks);
+					world.setTime(val.ticks());
 					sender.sendMessage(this.langConfig.c(
 							NodePath.path("commands", "time", "set")
 					).replaceText(
 							b -> b.match("{time}")
-									.replacement(val.displayName)
+									.replacement(val.displayName())
 					));
 				});
 
@@ -56,15 +58,15 @@ public final class BuildCommand {
 					final var sender = c.sender().source();
 					final World world = sender.getWorld();
 					final WeatherValue val = c.get("value");
-					world.setStorm(val.storm);
-					world.setThundering(val.thunder);
+					world.setStorm(val.storm());
+					world.setThundering(val.thunder());
 					sender.sendMessage(this.langConfig.c(
 							NodePath.path(
 									"commands", "weather", "set"
 							)
 					).replaceText(
 							b -> b.match("{weather}")
-									.replacement(val.displayName)
+									.replacement(val.displayName())
 					));
 				});
 
@@ -80,12 +82,20 @@ public final class BuildCommand {
 		MIDNIGHT(18000, "Midnight"),
 		SUNRISE(23000, "Sunrise");
 
-		final long ticks;
-		final String displayName;
+		private final long ticks;
+		private final String displayName;
 
 		TimeValue(final long ticks, final String displayName) {
 			this.ticks = ticks;
 			this.displayName = displayName;
+		}
+
+		public long ticks() {
+			return this.ticks;
+		}
+
+		public String displayName() {
+			return this.displayName;
 		}
 	}
 
@@ -94,9 +104,9 @@ public final class BuildCommand {
 		RAIN(true, false, "Rain"),
 		THUNDER(true, true, "Thunder");
 
-		final boolean storm;
-		final boolean thunder;
-		final String displayName;
+		private final boolean storm;
+		private final boolean thunder;
+		private final String displayName;
 
 		WeatherValue(
 				final boolean storm,
@@ -106,6 +116,18 @@ public final class BuildCommand {
 			this.storm = storm;
 			this.thunder = thunder;
 			this.displayName = displayName;
+		}
+
+		public boolean storm() {
+			return this.storm;
+		}
+
+		public boolean thunder() {
+			return this.thunder;
+		}
+
+		public String displayName() {
+			return this.displayName;
 		}
 	}
 }
