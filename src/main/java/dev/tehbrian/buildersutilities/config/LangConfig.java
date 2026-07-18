@@ -58,7 +58,12 @@ public final class LangConfig extends AbstractLangConfig<YamlConfigurateWrapper>
 	 */
 	public List<Component> cList(final NodePath path) {
 		final var node = this.wrapper().rootNode().node(path);
-		final List<String> raw = node.getList(String.class, List.of());
+		final List<String> raw;
+		try {
+			raw = node.getList(String.class, List.of());
+		} catch (final Exception e) {
+			return List.of();
+		}
 		final List<Component> result = new ArrayList<>(raw.size());
 		for (final String entry : raw) {
 			final String replaced = entry.replace(
