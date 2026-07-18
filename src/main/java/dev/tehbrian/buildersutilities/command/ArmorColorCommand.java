@@ -20,17 +20,24 @@ public final class ArmorColorCommand {
 		this.armorColorMenuProvider = armorColorMenuProvider;
 	}
 
-	public void register(final PaperCommandManager<Source> commandManager) {
-		final var main = commandManager.commandBuilder("armorcolor", "acc")
-				.commandDescription(description("Opens the armor color creator."))
+	public void register(
+			final PaperCommandManager<Source> commandManager
+	) {
+		final var main = commandManager.commandBuilder(
+				"armorcolor", "acc", "ac"
+		)
+				.commandDescription(description(
+						"Opens the armor color creator."
+				))
 				.permission(Permissions.ARMOR_COLOR)
 				.senderType(PlayerSource.class)
 				.handler(c -> {
 					final var sender = c.sender().source();
-					sender.openInventory(this.armorColorMenuProvider.generate());
+					sender.openInventory(
+							this.armorColorMenuProvider.generate()
+					);
 				});
 
 		commandManager.command(main);
 	}
-
 }
