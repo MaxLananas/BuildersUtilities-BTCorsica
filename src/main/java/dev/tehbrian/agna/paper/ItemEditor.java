@@ -24,7 +24,7 @@ public final class ItemEditor {
 	}
 
 	public static ItemEditor edit(final ItemType type) {
-		return new ItemEditor(new ItemStack(type));
+		return new ItemEditor(type.createItemStack());
 	}
 
 	public static ItemEditor edit(final ItemStack itemStack) {
