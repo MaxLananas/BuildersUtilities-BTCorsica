@@ -28,6 +28,9 @@ public final class Permissions {
 
 	public static final String WORLDEDIT_ALIASES = ROOT + ".worldedit-aliases";
 
+	public static final String WAYPOINT = ROOT + ".waypoint";
+	public static final String BUILD_CMD = ROOT + ".build";
+
 	private Permissions() {
 	}
 
