@@ -8,7 +8,6 @@ import dev.tehbrian.buildersutilities.banner.Session;
 import dev.tehbrian.buildersutilities.config.LangConfig;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -75,9 +74,9 @@ public final class ColorMenuListener implements Listener {
 			this.playerSessions.get(player).showInterface(player);
 		}
 
-		if (slot >= 18) { // color area.
+		if (slot >= 18) {
 			final Material clickedMaterial = requireNonNull(event.getCurrentItem()).getType();
-			if (!Tag.ITEMS_DYES.isTagged(clickedMaterial)) {
+			if (!clickedMaterial.name().endsWith("_DYE")) {
 				return;
 			}
 
