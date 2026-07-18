@@ -2,7 +2,7 @@ package dev.tehbrian.mayi.paper.restrictions;
 
 import dev.tehbrian.mayi.paper.PaperRestrictionLoader.RestrictionAdapter;
 
-public final class R_PlotSquared_6_7 implements RestrictionAdapter {
+public final class RPlotSquared67 implements RestrictionAdapter {
 
 	@Override
 	public String pluginName() {
