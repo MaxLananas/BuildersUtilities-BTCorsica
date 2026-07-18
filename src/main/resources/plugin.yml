@@ -1,6 +1,6 @@
 name: BuildersUtilities
 description: ${description}
-authors: [ TehBrian, Arcaniax, MaxLananas ]
+authors: [ TehBrian, Arcaniax ]
 website: https://github.com/TehBrian/BuildersUtilities
 
 softdepend: [ PlotSquared, WorldGuard ]
@@ -21,6 +21,9 @@ permissions:
     default: true
   buildersutilities.banner:
     description: Permission to open the banner creator.
+    default: true
+  buildersutilities.bloc:
+    description: Permission to open the special items menu.
     default: true
   buildersutilities.doubleslabbreak:
     description: Permission to use double slab break.
@@ -47,7 +50,7 @@ permissions:
     description: Permission to open the special items menu.
     default: true
   buildersutilities.spectate.entity:
-    description: Permission to spectate entities (including players).
+    description: Permission to spectate entities.
     default: true
     children:
       buildersutilities.spectate.player: true
@@ -55,8 +58,8 @@ permissions:
     description: Permission to spectate players.
     default: true
   buildersutilities.spectate.teleport:
-    description: Permission to teleport to players via the spectator menu.
+    description: Permission to teleport via spectator menu.
     default: true
   buildersutilities.worldedit-aliases:
-    description: Permission to use WorldEdit aliases if they are enabled.
+    description: Permission to use WorldEdit aliases.
     default: true
