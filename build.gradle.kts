@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-	paperweight.paperDevBundle("26.2.build.+")
+	paperweight.paperDevBundle("1.21.10-R0.1-SNAPSHOT")
 	compileOnly("org.jspecify:jspecify:1.0.0")
 	implementation("org.bstats:bstats-bukkit:3.2.1")
 	implementation("org.incendo:cloud-paper:2.0.0-beta.17")
