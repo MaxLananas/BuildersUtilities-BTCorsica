@@ -25,6 +25,9 @@ permissions:
   buildersutilities.bloc:
     description: Permission to open the special items menu.
     default: true
+  buildersutilities.build:
+    description: Permission to use build helper commands.
+    default: true
   buildersutilities.doubleslabbreak:
     description: Permission to use double slab break.
     default: true
@@ -41,10 +44,10 @@ permissions:
     description: Permission to use noclip.
     default: op
   buildersutilities.rc:
-    description: Permission to run /buildersutilities rc.
+    description: Permission to run /bu rc.
     default: op
   buildersutilities.reload:
-    description: Permission to run /buildersutilities reload.
+    description: Permission to run /bu reload.
     default: op
   buildersutilities.special:
     description: Permission to open the special items menu.
@@ -59,6 +62,9 @@ permissions:
     default: true
   buildersutilities.spectate.teleport:
     description: Permission to teleport via spectator menu.
+    default: true
+  buildersutilities.waypoint:
+    description: Permission to use waypoints.
     default: true
   buildersutilities.worldedit-aliases:
     description: Permission to use WorldEdit aliases.
