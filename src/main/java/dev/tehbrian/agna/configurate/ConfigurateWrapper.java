@@ -6,7 +6,7 @@ import org.spongepowered.configurate.loader.ConfigurationLoader;
 
 import java.nio.file.Path;
 
-public class ConfigurateWrapper<T extends ConfigurationLoader<CommentedConfigurationNode>> {
+public final class ConfigurateWrapper<T extends ConfigurationLoader<CommentedConfigurationNode>> {
 
 	private final Path path;
 	private final T loader;
