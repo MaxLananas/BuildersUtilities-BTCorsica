@@ -7,6 +7,7 @@ import net.kyori.adventure.text.Component;
 import org.spongepowered.configurate.NodePath;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
@@ -40,14 +41,31 @@ public final class LangConfig extends AbstractLangConfig<YamlConfigurateWrapper>
 	/**
 	 * Splits the input string by line and parses each line individually.
 	 *
-	 * <p>This method is useful for item lore because that requires a list of
-	 * components rather than a single component with newlines.</p>
-	 *
 	 * @param path the config path
-	 * @return the component
+	 * @return the component list
 	 */
 	public List<Component> cl(final NodePath path) {
 		return this.getAndVerifyString(path).lines()
 				.map(miniMessage()::deserialize).toList();
+	}
+
+	/**
+	 * Reads a YAML list at the given path and parses each entry
+	 * as a MiniMessage component with prefix replacement.
+	 *
+	 * @param path the config path
+	 * @return the component list
+	 */
+	public List<Component> cList(final NodePath path) {
+		final var node = this.wrapper().rootNode().node(path);
+		final List<String> raw = node.getList(String.class, List.of());
+		final List<Component> result = new ArrayList<>(raw.size());
+		for (final String entry : raw) {
+			final String replaced = entry.replace(
+					"{prefix}", this.prefix()
+			);
+			result.add(miniMessage().deserialize(replaced));
+		}
+		return result;
 	}
 }
