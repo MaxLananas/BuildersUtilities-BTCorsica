@@ -19,6 +19,7 @@ import dev.tehbrian.buildersutilities.banner.menu.PatternMenuListener;
 import dev.tehbrian.buildersutilities.command.AdvancedFlyCommand;
 import dev.tehbrian.buildersutilities.command.ArmorColorCommand;
 import dev.tehbrian.buildersutilities.command.BannerCommand;
+import dev.tehbrian.buildersutilities.command.BlocCommand;
 import dev.tehbrian.buildersutilities.command.BuildersUtilitiesCommand;
 import dev.tehbrian.buildersutilities.command.NightVisionCommand;
 import dev.tehbrian.buildersutilities.command.NoclipCommand;
@@ -63,7 +64,8 @@ public final class BuildersUtilities extends JavaPlugin {
 	private @MonotonicNonNull Injector injector;
 
 	private static boolean isEmpty(final Component component) {
-		return PlainTextComponentSerializer.plainText().serialize(component).isEmpty();
+		return PlainTextComponentSerializer.plainText()
+				.serialize(component).isEmpty();
 	}
 
 	@Override
@@ -74,9 +76,15 @@ public final class BuildersUtilities extends JavaPlugin {
 					new SingletonModule()
 			);
 		} catch (final Exception e) {
-			this.getSLF4JLogger().error("Something went wrong while creating the injector. Disabling plugin");
+			this.getSLF4JLogger().error(
+					"Something went wrong while creating the injector. "
+							+ "Disabling plugin"
+			);
 			disableSelf(this);
-			this.getSLF4JLogger().error("Printing stack trace. Please send this to the developers", e);
+			this.getSLF4JLogger().error(
+					"Printing stack trace. Please send this to the devs",
+					e
+			);
 			return;
 		}
 
@@ -102,15 +110,29 @@ public final class BuildersUtilities extends JavaPlugin {
 
 	public boolean loadConfiguration() {
 		return new ConfigLoader(this).load(List.of(
-				Loadable.ofVersioned("config.yml", this.injector.getInstance(ConfigConfig.class), 2),
-				Loadable.ofVersioned("lang.yml", this.injector.getInstance(LangConfig.class), 3),
-				Loadable.ofVersioned("special.yml", this.injector.getInstance(SpecialConfig.class), 2)
+				Loadable.ofVersioned(
+						"config.yml",
+						this.injector.getInstance(ConfigConfig.class),
+						2
+				),
+				Loadable.ofVersioned(
+						"lang.yml",
+						this.injector.getInstance(LangConfig.class),
+						3
+				),
+				Loadable.ofVersioned(
+						"special.yml",
+						this.injector.getInstance(SpecialConfig.class),
+						2
+				)
 		));
 	}
 
 	private boolean initCommands() {
 		if (this.commandManager != null) {
-			throw new IllegalStateException("The CommandManager is already instantiated");
+			throw new IllegalStateException(
+					"The CommandManager is already instantiated"
+			);
 		}
 
 		this.commandManager = PaperCommandManager
@@ -118,10 +140,15 @@ public final class BuildersUtilities extends JavaPlugin {
 				.executionCoordinator(simpleCoordinator())
 				.buildOnEnable(this);
 
-		final LangConfig langConfig = this.injector.getInstance(LangConfig.class);
+		final LangConfig langConfig =
+				this.injector.getInstance(LangConfig.class);
 
-		final MinecraftExceptionHandler.MessageFactory<Source, NoPermissionException> noPermissionHandler = (formatter, ctx) -> {
-			final var noPermission = langConfig.c(NodePath.path("commands", "no-permission"));
+		final MinecraftExceptionHandler
+				.MessageFactory<Source, NoPermissionException>
+				noPermissionHandler = (formatter, ctx) -> {
+			final var noPermission = langConfig.c(
+					NodePath.path("commands", "no-permission")
+			);
 			if (isEmpty(noPermission)) {
 				return this.getServer().permissionMessage();
 			} else {
@@ -133,26 +160,44 @@ public final class BuildersUtilities extends JavaPlugin {
 				.defaultArgumentParsingHandler()
 				.defaultInvalidSenderHandler()
 				.defaultInvalidSyntaxHandler()
-				.handler(NoPermissionException.class, noPermissionHandler)
+				.handler(
+						NoPermissionException.class,
+						noPermissionHandler
+				)
 				.defaultCommandExecutionHandler()
 				.registerTo(this.commandManager);
 
-		this.injector.getInstance(AdvancedFlyCommand.class).register(this.commandManager);
-		this.injector.getInstance(ArmorColorCommand.class).register(this.commandManager);
-		this.injector.getInstance(BannerCommand.class).register(this.commandManager);
-		this.injector.getInstance(BuildersUtilitiesCommand.class).register(this.commandManager);
-		this.injector.getInstance(NightVisionCommand.class).register(this.commandManager);
-		this.injector.getInstance(NoclipCommand.class).register(this.commandManager);
+		this.injector.getInstance(AdvancedFlyCommand.class)
+				.register(this.commandManager);
+		this.injector.getInstance(ArmorColorCommand.class)
+				.register(this.commandManager);
+		this.injector.getInstance(BannerCommand.class)
+				.register(this.commandManager);
+		this.injector.getInstance(BlocCommand.class)
+				.register(this.commandManager);
+		this.injector.getInstance(BuildersUtilitiesCommand.class)
+				.register(this.commandManager);
+		this.injector.getInstance(NightVisionCommand.class)
+				.register(this.commandManager);
+		this.injector.getInstance(NoclipCommand.class)
+				.register(this.commandManager);
 
-		if (this.injector.getInstance(ConfigConfig.class).data().worldEditAliases()) {
+		final ConfigConfig cc =
+				this.injector.getInstance(ConfigConfig.class);
+		if (cc.data().worldEditAliases()) {
 			final PluginManager pm = this.getServer().getPluginManager();
 			if (pm.isPluginEnabled("WorldEdit")) {
-				this.injector.getInstance(WorldEditAliases.class).register(this.commandManager, false);
+				this.injector.getInstance(WorldEditAliases.class)
+						.register(this.commandManager, false);
 			} else if (pm.isPluginEnabled("FastAsyncWorldEdit")) {
-				this.injector.getInstance(WorldEditAliases.class).register(this.commandManager, true);
+				this.injector.getInstance(WorldEditAliases.class)
+						.register(this.commandManager, true);
 			} else {
-				this.getSLF4JLogger().error("worledit-aliases is enabled in config.yml, but WorldEdit isn't present "
-						+ "on this server. WorldEdit aliases will not be registered");
+				this.getSLF4JLogger().error(
+						"worledit-aliases is enabled in config.yml, "
+								+ "but WorldEdit isn't present. "
+								+ "WorldEdit aliases will not be registered"
+				);
 			}
 		}
 
@@ -165,12 +210,10 @@ public final class BuildersUtilities extends JavaPlugin {
 				this.injector.getInstance(AbilityMenuListener.class),
 				this.injector.getInstance(ArmorColorMenuListener.class),
 				this.injector.getInstance(SpecialMenuListener.class),
-
 				this.injector.getInstance(BaseMenuListener.class),
 				this.injector.getInstance(ColorMenuListener.class),
 				this.injector.getInstance(PatternMenuListener.class),
 				this.injector.getInstance(DoneMenuListener.class),
-
 				this.injector.getInstance(AdvancedFlyListener.class),
 				this.injector.getInstance(DoubleSlabListener.class),
 				this.injector.getInstance(GlazedTerracottaListener.class),
@@ -182,7 +225,9 @@ public final class BuildersUtilities extends JavaPlugin {
 	private void initRestrictions() {
 		final var loader = new PaperRestrictionLoader(
 				this.getSLF4JLogger(),
-				Arrays.asList(this.getServer().getPluginManager().getPlugins()),
+				Arrays.asList(
+						this.getServer().getPluginManager().getPlugins()
+				),
 				List.of(RPlotSquared67.class, RWorldGuard7.class)
 		);
 
