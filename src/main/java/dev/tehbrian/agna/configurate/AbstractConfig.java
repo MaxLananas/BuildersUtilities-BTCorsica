@@ -10,7 +10,7 @@ public abstract class AbstractConfig<W extends ConfigurateWrapper<?>> {
 		this.wrapper = wrapper;
 	}
 
-	public W wrapper() {
+	public final W wrapper() {
 		return this.wrapper;
 	}
 
