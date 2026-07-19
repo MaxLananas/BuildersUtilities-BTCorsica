@@ -1,10 +1,10 @@
-# BuildersUtilities — BTE Corse
+# BuildersUtilities — BT Corsica
 
 [![License](https://img.shields.io/github/license/TehBrian/BuildersUtilities)](LICENSE)
 [![Paper 1.21.10](https://img.shields.io/badge/Paper-1.21.10-blue)](https://papermc.io/)
 [![Java 21](https://img.shields.io/badge/Java-21-orange)](https://adoptium.net/)
 
-A curated bundle of builder tools, forked and adapted for **Build The Earth — Corse**.
+A curated bundle of builder tools, forked and adapted for **Build The Corsica**.
 
 ---
 
